@@ -1,0 +1,105 @@
+-- Table of Contents --
+    1. Dialog
+    2. Making Choices
+    3. Characters
+
+--Dialog--
+To create dialog for a character, follow this format:
+            
+CharacterName "Dialog"
+
+You can only have one Character to speak on each line, and going to a new line finishes the Character's dialog. There are also quite a few modifiers you can add to Dialog:
+
+Text Modifiers:
+    - {c} Clears the previous dialog
+    - {a} Appends the dialog after the {a} tag to the previous line of dialog
+    - {w time} Clears the previous dialog, shows the dialog after time seconds.
+    - {wa time} Appends the dialog to the previous dialog after time seconds.
+Action Modifiers:
+    - <txtSpd speed> Changes the text speed to whatever is indicated inside the speed variable.
+Function Calls:
+    - To perform Function Calls inside the Dialog, follow this format: [functionName(parameters)]
+
+--Making Choices--
+To introduce a Choice Section inside the dialog, follow the format below: ( make sure theres an empty line between the last line of Dialog and the line starting with choice ) as seen below, as well as an empty line afterwards. The Tab Formatting MUST also be followed.
+
+    choice "What do you do?"
+{
+    "Run for your life"
+    [
+        narrator "I attempt to make a run for it.[playSound(Bush_Walking,0.2,1.0)] But she's too fast, far too fast for my feeble legs"
+        Yong Yong "<i>Poke</i>. Ha, that's what you get for making the birds fly away."
+    ]
+    "Attempt a Hug"
+    [
+        narrator "I try and go in for a hug. It never works, but hugging Yong Yong is one of my irresitable pleasures.[changeExpression(Nick,Eager)][moveCharacter(Nick,1.0,0,0.8)]"
+    ]
+    "Call for Help"
+    [
+        narrator "I look wildly at the people around us. Oh no...., there's no one here. I'm doomed.[playSound(giant_walking,0.2,1.0)]"
+        Yong Yong "<b>POKE</b> Hah, your belly is so round.
+        Nick "Ouch! Hurt you know..."
+    ]
+}
+
+--Characters--
+Note: Character Sprites are assumed to be stored inside the following directory, Assets/Resources/Images/Characters/SpriteName.
+
+    -Functions-
+    Name: moveCharacter( string characterName, float xPosition, float yPosition, float speed opt )
+    Description: Moves the Sprite of the specified Character to a new Position (xPosition, yPosition) inside the Game Window at the specified speed.
+                 Note that the Anchor of all Sprites is considered to be the Anchor at the bottom left.
+    Example: moveCharacter( Yong_Yong, 1.0, 1.0, 1.0 )
+
+    Name: setPosition( string characterName, float positionX, float positionY )
+    Description: Moves the Specified Character instantly to a Location
+    Example: setPosition( Yong_Yong, 1, 1 )
+
+    Name: changeExpression( string characterName, string expressionName, float speed(optional) )
+    Description: Changes the Currently Active Texture for a Selected Character
+    Example: changeExpression( Yong_Yong, disgust )
+    Notes: changeExpression creates the Character specified in characterName if they are not already created and sets them
+           as active. Furthermore, the character's name is appended to expressionName for ease of searching.
+           (E.G: disgust and Yong_Yong for characterName would be Yong_Yong_Disgust )
+
+    Name: faceDirection( string characterName, const string direction )
+    Description: Modifies the currently Active Sprite belonging to CharacterName in const direction. There are three different constants:
+        - flip: Flips the Character's Sprite
+        - left: Rotates the Sprite so that it's facing left
+        - right: Rotates the Sprite so that it's facing right.
+    Example: faceDirection( Yong_Yong, left )
+
+--- Backgrounds ---
+Note: The Relevant Background Textures are found inside the Following Path "Images/UI/Backdrops/Still/"
+Note: Currently Animated Backgrounds are not supported. But that will be implemented in the future. Probably.
+Note: The Relevant Transition Effects are found inside the Following Path "Images/TransitionEffects/"
+
+    Name: setBackground( string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+    Description: Sets a specified picture for the Background Layer, transEffect can be passed as an optional transition effect
+    Example: setBackground( forest, 1, true, fade )
+
+    Name: setForeground( string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+    Description: Sets a specified picture for the Foreground Layer, transEffect can be passed as an optional transition effect
+    Example: setForeground( forest, 1, true, fade )
+
+    Name: setCinematic string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+    Description: Sets a specified picture for the Cinematic Layer, transEffect can be passed as an optional transition effect
+    Example: setCinematic( forest, 1, true, fade )
+
+--Audio--
+Note: The Relevant Musics are found inside the Following Path: Audio/Music/
+Note: The Relevant Sound Effects are found inside the Following Path: Audio/SFX
+
+    Name: playSound( string clipName, float volumne, float pitch )
+    Description: Plays a specified sound effect( according to the clipName ) at a specific volume and at a specific pitch.
+    Example: playSound( thunder, 1, 1)
+
+    Name: stopSound( string clipName, float destroyTime)
+    Description: Destroys the specific sound effect specified by clipName after destroyTime seconds
+    Example: stopSound( thunder, 1 )
+
+    Name: playMusic( string clipName, float maxVolume, float pitch, float startingVolume, bool playOnStart, bool loop )
+    Description: Plays the music specified by the clipName. The other parameters are fairly self explanatory I believe.
+    Example: playMusic( party_music, 1, 1, 0, 1, 1)
+
+

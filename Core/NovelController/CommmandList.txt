@@ -1,0 +1,97 @@
+--- List of Contents ----
+1. Characters
+2. Backgrounds
+3. Sound and Audio
+
+--- Characters ---
+
+--Dialog--
+
+Function Name: None
+Description: Constructs Simple Dialog for a Character
+Parameters: None
+Fuction Use: Used to construct simple dialog for a Character. To use, follow this format:
+             Character Name "Dialog"
+Example: Yong Yong "Hello?"
+Varations: Can be used to create additive dialog by adding a '+' and putting the next line of dialog on a new line
+Example: Narrator "Woof" +
+"Woof"
+Notes: This automatically creates the Character from a prefab inside the Resources/Characters folder in their default
+       position and sets the dialog box to Active if it not already active.
+
+--Dialog--
+
+Function Name: None
+Description: Constructs Simple Dialog for a Character
+Parameters: None
+Function Use: 
+
+--Moving and Setting Position--
+
+Function Name: setPosition
+Description: Moves the Specified Character instantly to a Location
+Parameters: setPosition( characterName, positionX, positionY ) )
+Example: setPosition( Yong_Yong, 1, 1 )
+
+Function Name: moveCharacter
+Description: Moves the Specified Character according to the specified speed to a Location
+Parameters: moveCharacter( characterName, positionX, positionY ), speed(optional) )
+Example: moveCharacter( Yong_Yong, 1, 1, 0.5)
+Notes: By default, speed is 1.0 if a value for speed is not passed
+
+Function Name: moveCharacterAndTransition
+Description: Moves the Specified Character according to the specified speed to a location and changes the character's expression at the same time
+
+
+--Changing Expression--
+
+Function Name: changeExpression
+Description: Changes the Currently Active Texture for a Selected Character
+Parameters: changeExpression( characterName, expressionName, speed(optional) )
+Example: changeExpression( Yong_Yong, disgust )
+Notes: changeExpression creates the Character specified in characterName if they are not already created and sets them
+       as active. Furthermore, the character's name is appended to expressionName for ease of searching.
+       (E.G: disgust and Yong_Yong for characterName would be Yong_Yong_Disgust )
+       The Search Path for the various expressions is "Images/Characters/" + expressionName
+
+--- Backgrounds ---
+
+Function Name: setBackground
+Description: Sets a specified picture for the Background Layer, transEffect can be passed as an optional transition effect
+Parameters: setBackground( string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+Example: setBackground( forest, 1, true, fade )
+Notes: setBackground looks for the relevant Texture inside "Images/UI/Backdrops/Still/"
+       transitionEffects are looked for inside "Images/TransitionEffects/"
+
+Function Name: setForeground
+Description: Sets a specified picture for the Foreground Layer, transEffect can be passed as an optional transition effect
+Parameters: setForeground( string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+Example: setForeground( forest, 1, true, fade )
+Notes: setForeground looks for the relevant Texture inside "Images/UI/Backdrops/Still/"
+       transitionEffects are looked for inside "Images/TransitionEffects/"
+
+Function Name: setCinematic
+Description: Sets a specified picture for the Cinematic Layer, transEffect can be passed as an optional transition effect
+Parameters: setCinematic string texname, float spd(optional), bool smooth(optional), string transEffect(optional) )
+Example: setCinematic( forest, 1, true, fade )
+Notes: setCinematic looks for the relevant Texture inside "Images/UI/Backdrops/Still/"
+       transitionEffects are looked for inside "Images/TransitionEffects/"
+
+--- Sound and Audio ---
+
+Function Name: playSound
+Description: Plays a specified SFX
+Parameters: playSound( sfxName, volume, pitch )
+Example: playSound( gunShot )
+Notes: playSound looks for the relevant AudioClip inside "Audio/SFX/" + sfxName
+
+Function Name: playMusic
+Description: Plays a specified piece of music
+Parameters: playMusic( musicName, maxVol, pitch, startVol, playOnStart, loop )
+Example: playMusic( HeartBeat )
+Notes: playMusic looks for the relevant AudioClip inside "Audio/Music/" + musicName
+
+
+
+
+
